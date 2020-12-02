@@ -21,8 +21,8 @@ To use this tool, paste the following snippet into tool.xml, and include all res
     <arg pathRef="convert_tsv_to_sqlite.script"/>
     <arg pathRef="csvs-to-sqlite"/>
     <arg valueRef="sqlite"/>
-    <arg option="<result_view_1>" valueRef="<result_file_1>"/>
-    <arg option="<result_view_2>" valueRef="<result_file_2>"/>
+    <arg option="<result_view_1>"       valueRef="<result_file_1>"/>
+    <arg option="<result_view_2>"       valueRef="<result_file_2>"/>
     ...
   </execution>
 </tool>
