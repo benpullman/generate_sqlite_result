@@ -2,7 +2,8 @@
 
 To use this tool, paste the following snippet into tool.xml, and include all results files where you want to pregenerate the SQLite files for.  result_view corresponds to the view name in result.xml for the given file.
 
-```<pathSet base="/Users/bpullman/miniconda3/envs/datasette_env/bin">
+```
+<pathSet base="/Users/bpullman/miniconda3/envs/datasette_env/bin">
   <pathVar name="csvs-to-sqlite" path="csvs-to-sqlite"/>
 </pathSet>
 <pathSet base="generate_sqlite_result/0.1">
@@ -24,4 +25,5 @@ To use this tool, paste the following snippet into tool.xml, and include all res
     <arg option="<result_view_2>" valueRef="<result_file_2>"/>
     ...
   </execution>
-</tool>```
+</tool>
+```
