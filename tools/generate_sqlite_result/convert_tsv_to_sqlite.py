@@ -8,7 +8,7 @@ def result_file_name(result_file, result_view_name):
 def run_mysql_convert(mysql_binary, result_file, result_view_name, output_folder):
     seperator = []
     if 'tsv' in result_file.name:
-        seperator = ['-s', "$'\t'"]
+        seperator = ['-s', '\t']
     cmd = [
         mysql_binary
     ] + seperator + [
@@ -16,7 +16,6 @@ def run_mysql_convert(mysql_binary, result_file, result_view_name, output_folder
         result_file,
         output_folder.joinpath(result_file_name(result_file, result_view_name))
     ]
-    print(' '.join([str(c) for c in cmd]))
     subprocess.run(cmd)
 
 def main():
