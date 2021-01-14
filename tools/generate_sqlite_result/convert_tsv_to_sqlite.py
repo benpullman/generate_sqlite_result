@@ -8,11 +8,11 @@ def result_file_name(result_file, result_view_name):
 def run_mysql_convert(mysql_binary, result_file, result_view_name, output_folder):
     seperator = []
     if 'tsv' in result_file.name:
-        seperator = ['-s', '\t']
+        seperator = ['--separator', '\t']
     cmd = [
         mysql_binary
     ] + seperator + [
-        '-t', 'Result',
+        '--table', 'Result',
         result_file,
         output_folder.joinpath(result_file_name(result_file, result_view_name))
     ]
