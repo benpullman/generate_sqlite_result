@@ -6,15 +6,16 @@ def result_file_name(result_file, result_view_name):
     return f'{result_view_name}-main_{result_file.with_suffix(".db").name}'
 
 def run_mysql_convert(mysql_binary, result_file, result_view_name, output_folder):
+    result_file_alias = Path('./Result.ext')
+    result_file_alias.symlink_to(result_file)
     seperator = []
     if 'tsv' in result_file.name:
-        seperator = ['--separator', '\t']
+        seperator = ['--delimiter', '\t']
     cmd = [
         mysql_binary
     ] + seperator + [
-        '--table', 'Result',
-        result_file,
-        output_folder.joinpath(result_file_name(result_file, result_view_name))
+        '--file', result_file_alias,
+        '--output', output_folder.joinpath(result_file_name(result_file, result_view_name))
     ]
     subprocess.run(cmd)
 
