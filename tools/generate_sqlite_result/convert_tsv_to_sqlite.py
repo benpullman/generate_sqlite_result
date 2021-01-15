@@ -13,7 +13,7 @@ def rename_table(db, table_name):
     cursor      = connection.cursor()
     cursor.execute(renameTable)
 
-def run_mysql_convert(mysql_binary, result_file, result_view_name, output_folder):
+def run_mysql_convert(result_file, result_view_name, output_folder):
     db = output_folder.joinpath(result_file_name(result_file, result_view_name))
     # all the usual options are supported
     delimiter = ','
@@ -34,7 +34,7 @@ def main():
     grouped_outputs = [(outputs[2*i][1:],Path(outputs[2*i+1])) for i in range(int(len(outputs)/2))]
 
     for (result_view_name, result_file) in grouped_outputs:
-        run_mysql_convert(mysql_binary, result_file, result_view_name, output_folder)
+        run_mysql_convert(result_file, result_view_name, output_folder)
 
 if __name__ == '__main__':
     main()
