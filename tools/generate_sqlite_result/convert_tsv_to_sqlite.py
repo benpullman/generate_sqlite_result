@@ -3,6 +3,7 @@ import subprocess
 import sys
 import shutil
 import sqlite3
+import csv_to_sqlite
 
 def result_file_name(result_file, result_view_name):
     return f'{result_view_name}-main_{result_file.with_suffix(".db").name}'
@@ -16,17 +17,12 @@ def rename_table(db, table_name):
 
 def run_mysql_convert(mysql_binary, result_file, result_view_name, output_folder):
     db = output_folder.joinpath(result_file_name(result_file, result_view_name))
-    seperator = []
+    # all the usual options are supported
+    delimiter = ','
     if 'tsv' in result_file.name:
-        seperator = ['--delimiter', '\t']
-    cmd = [
-        mysql_binary
-    ] + seperator + [
-        '--file', result_file,
-        '--output', db
-    ]
-    print(cmd)
-    p = subprocess.run(cmd)
+        delimiter = '\t'
+    options = csv_to_sqlite.CsvOptions(delimiter=delimiter)
+    csv_to_sqlite.write_csv([str(result_file)], str(db), options)
     rename_table(db,result_file.stem)
 
 def main():
