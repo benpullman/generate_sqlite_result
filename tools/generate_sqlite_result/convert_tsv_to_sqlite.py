@@ -1,7 +1,6 @@
 from pathlib import Path
 import subprocess
 import sys
-import shutil
 import sqlite3
 import csv_to_sqlite
 
