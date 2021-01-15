@@ -27,12 +27,11 @@ def run_mysql_convert(mysql_binary, result_file, result_view_name, output_folder
 
 def main():
 
-    mysql_binary = Path(sys.argv[1])
-    output_folder = Path(sys.argv[2])
-    outputs = sys.argv[3:]
+    output_folder = Path(sys.argv[1])
+    outputs = sys.argv[2:]
 
     if len(outputs) % 1 == 1:
-        raise Exception("Cannot have odd number of inputs after mysql_binary")
+        raise Exception("All outputs must be paired (-result_view_name result_view_file)")
 
     grouped_outputs = [(outputs[2*i][1:],Path(outputs[2*i+1])) for i in range(int(len(outputs)/2))]
 
