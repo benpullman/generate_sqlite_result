@@ -8,7 +8,7 @@ def result_file_name(result_file, result_view_name):
     return f'{result_view_name}-main_{result_file.with_suffix(".db").name}'
 
 def rename_table(db, table_name):
-    renameTable = "ALTER TABLE {} RENAME TO Result".format(table_name)
+    renameTable = 'ALTER TABLE "{}" RENAME TO Result'.format(table_name)
     print(renameTable)
     connection  = sqlite3.connect(db)
     cursor      = connection.cursor()
