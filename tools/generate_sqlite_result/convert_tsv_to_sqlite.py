@@ -6,7 +6,7 @@ def result_file_name(result_file, result_view_name):
     return f'{result_view_name}-main_{result_file.with_suffix(".db").name}'
 
 def run_mysql_convert(mysql_binary, result_file, result_view_name, output_folder):
-    result_file_alias = Path('Result.{}'.format(result_file))
+    result_file_alias = Path('Result.{}'.format(result_file.name))
     result_file_alias.symlink_to(result_file)
     seperator = []
     if 'tsv' in result_file.name:
