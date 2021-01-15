@@ -6,7 +6,7 @@ To use this tool, paste the following snippet into tool.xml, and include all res
 <pathSet base="/Users/bpullman/miniconda3/envs/datasette_env/bin">
   <pathVar name="csvs-to-sqlite" path="csvs-to-sqlite"/>
 </pathSet>
-<pathSet base="generate_sqlite_result/0.1">
+<pathSet base="generate_sqlite_result/0.2">
   <pathVar name="convert_tsv_to_sqlite.script" path="convert_tsv_to_sqlite.py" />
 </pathSet>
 <pathSet base="anaconda3">
