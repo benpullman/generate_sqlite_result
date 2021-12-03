@@ -48,10 +48,11 @@ def rename_table(db, table_name, index_columns):
     renameTable = 'ALTER TABLE "{}" RENAME TO Result'.format(table_name)
     print(renameTable)
     indexOperations = []
-    for index in index_columns:
-        index_name = index.replace(' ','_').replace('+','_')
-        index_columns = ','.join(['"{}"'.format(i) for i in index.split('+') if i != ''])
-        indexOperations.append('CREATE INDEX index_{} ON Result ({})'.format(index_name, index_columns))
+    if index_columns is not None:
+        for index in index_columns:
+            index_name = index.replace(' ','_').replace('+','_')
+            index_columns = ','.join(['"{}"'.format(i) for i in index.split('+') if i != ''])
+            indexOperations.append('CREATE INDEX index_{} ON Result ({})'.format(index_name, index_columns))
     connection  = sqlite3.connect(db)
     cursor      = connection.cursor()
     cursor.execute(renameTable)
