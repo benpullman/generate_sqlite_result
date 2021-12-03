@@ -60,7 +60,7 @@ def rename_table(db, table_name, index_columns):
         print(indexOperation)
         cursor.execute(indexOperation)
 
-def run_mysql_convert(result_file, result_view_name, column_types, index_columns, output_folder):
+def run_sqlite_convert(result_file, result_view_name, column_types, index_columns, output_folder):
     print("Input TSV result file  = [" + str(result_file.resolve()) + "]")
     db = output_folder.joinpath(result_file_name(result_file, result_view_name))
     print("Output SQLite database file = [" + str(db.resolve()) + "]")
@@ -91,7 +91,8 @@ def get_parameters(parameter_file):
     if not os.path.isfile(parameter_file):
         return None, None, None, None
     # parse parameter file
-    configuration = configparser.RawConfigParser(allow_no_value=True)
+    configuration = configparser.ConfigParser(allow_no_value=True)
+    configuration.optionxform = str
     configuration.read(parameter_file)
     # extract relevant parameters
     result_view_name = None
@@ -195,7 +196,7 @@ def main():
         print("ERROR: Argument TSV result file [" + input_tsv_file + "] is not a valid readable file.")
         sys.exit(1)
     # convert result file to SQLite database
-    run_mysql_convert(Path(input_tsv_file), result_view_name, column_types, indexes, output_folder)
+    run_sqlite_convert(Path(input_tsv_file), result_view_name, column_types, indexes, output_folder)
 
 if __name__ == '__main__':
     main()
