@@ -91,7 +91,7 @@ def get_parameters(parameter_file):
     if not os.path.isfile(parameter_file):
         return None, None, None, None
     # parse parameter file
-    configuration = configparser.ConfigParser(allow_no_value=True)
+    configuration = configparser.ConfigParser(allow_no_value=True, delimiters=('='))
     configuration.optionxform = str
     configuration.read(parameter_file)
     # extract relevant parameters
