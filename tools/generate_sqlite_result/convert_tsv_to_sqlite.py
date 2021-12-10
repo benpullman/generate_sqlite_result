@@ -44,9 +44,7 @@ def format_ms(elapsed):
         message += "s"
     return message
 
-def rename_table(db, table_name, index_columns):
-    renameTable = 'ALTER TABLE "{}" RENAME TO Result'.format(table_name)
-    print(renameTable)
+def create_indexes(db, index_columns):
     indexOperations = []
     if index_columns is not None:
         for index in index_columns:
@@ -55,7 +53,6 @@ def rename_table(db, table_name, index_columns):
             indexOperations.append('CREATE INDEX index_{} ON Result ({})'.format(index_name, index_columns))
     connection  = sqlite3.connect(db)
     cursor      = connection.cursor()
-    cursor.execute(renameTable)
     for indexOperation in indexOperations:
         print(indexOperation)
         cursor.execute(indexOperation)
@@ -82,7 +79,7 @@ def run_sqlite_convert(result_file, result_view_name, column_types, index_column
     print("Post-processing database...")
     sys.stdout.flush()
     start = end
-    rename_table(db,result_file.stem, index_columns)
+    create_indexes(db, index_columns)
     end = current_time_ms()
     print("  Completed in " + format_ms(end - start))
     sys.stdout.flush()
