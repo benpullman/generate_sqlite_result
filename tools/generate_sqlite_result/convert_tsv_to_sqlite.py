@@ -67,9 +67,9 @@ def run_sqlite_convert(result_file, result_view_name, column_types, index_column
         delimiter = ','
     options = None
     if column_types is not None:
-        options = csv_to_sqlite.CsvOptions(delimiter=delimiter, typing_style='manual', column_types=column_types, column_select_func=lambda x:x in column_types.keys())
+        options = csv_to_sqlite.CsvOptions(delimiter=delimiter, bracket_style='backtick', typing_style='manual', column_types=column_types, column_select_func=lambda x:x in column_types.keys())
     else:
-        options = csv_to_sqlite.CsvOptions(delimiter=delimiter)
+        options = csv_to_sqlite.CsvOptions(delimiter=delimiter, bracket_style='backtick')
     print("Converting...")
     sys.stdout.flush()
     start = current_time_ms()
